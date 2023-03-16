@@ -9,41 +9,41 @@ CREATE TABLE IF NOT EXISTS public.utilisateurs
     nom character varying(30) NOT NULL,
     prenom character varying(30) NOT NULL,
     numero_adherant integer NOT NULL,
-    pseudo character varying(30) NOT NULL,
+    pseudo character varying(30),
     mot_passe character varying(30) NOT NULL,
-    coordonnees integer NOT NULL,
-    mail character varying(30) NOT NULL,
+    mail character varying(50) NOT NULL,
     telephone character varying(15) NOT NULL,
+    coordonnees integer,
     PRIMARY KEY (id_utilisateur)
 );
 
 CREATE TABLE IF NOT EXISTS public.permissions
 (
     id_permission serial NOT NULL,
-    utilisateur integer NOT NULL,
     statut character varying(30) NOT NULL,
+    utilisateur integer,
     PRIMARY KEY (id_permission)
 );
 
 CREATE TABLE IF NOT EXISTS public.articles
 (
     id_article serial NOT NULL,
-    utilisateur integer NOT NULL,
     titre character varying(30) NOT NULL,
     corps character varying(65535) NOT NULL,
     date_ecriture date NOT NULL,
     date_modif date,
     like_dislike character varying(10),
+    utilisateur integer,
     PRIMARY KEY (id_article)
 );
 
 CREATE TABLE IF NOT EXISTS public.commentaires
 (
     id_commentaire serial NOT NULL,
-    utilisateur integer NOT NULL,
-    article integer NOT NULL,
     commentaire character varying(300) NOT NULL,
     like_dislike character varying(10),
+    utilisateur integer,
+    article integer,
     PRIMARY KEY (id_commentaire)
 );
 
@@ -58,22 +58,22 @@ CREATE TABLE IF NOT EXISTS public.categories
 CREATE TABLE IF NOT EXISTS public.demande_contact
 (
     id_demandecontact serial NOT NULL,
-    utilisateur integer NOT NULL,
+    utilisateur integer,
     mail character varying(30) NOT NULL,
     message character varying(200),
-    type_demande integer NOT NULL,
+    type_demande integer,
     PRIMARY KEY (id_demandecontact)
 );
 
 CREATE TABLE IF NOT EXISTS public.evenements
 (
     id_evenement serial NOT NULL,
-    nom character varying(30) NOT NULL,
+    nom character varying(50) NOT NULL,
     date_creation date NOT NULL,
     "date_début" date NOT NULL,
     date_fin date NOT NULL,
-    description character varying(200) NOT NULL,
-    organisateur integer NOT NULL,
+    description character varying(200),
+    organisateur integer,
     PRIMARY KEY (id_evenement)
 );
 
@@ -84,8 +84,9 @@ CREATE TABLE IF NOT EXISTS public.reservations
     participant character varying(30) NOT NULL,
     validation boolean,
     date_reservation date NOT NULL,
-    creneau timestamp(6) without time zone NOT NULL,
     date_evenement date NOT NULL,
+    heure_debut timestamp(6) without time zone NOT NULL,
+    duree integer,
     description character varying(200),
     PRIMARY KEY (id_reservation)
 );
@@ -123,10 +124,10 @@ CREATE TABLE IF NOT EXISTS public.coordonnees
 (
     id_coordonnees serial NOT NULL,
     numero_rue character varying(10),
-    rue character varying(30) NOT NULL,
-    complement_adresse character varying(30),
+    rue character varying(50) NOT NULL,
+    complement_adresse character varying(50),
     cp integer NOT NULL,
-    ville character varying(30) NOT NULL,
+    ville character varying(50) NOT NULL,
     PRIMARY KEY (id_coordonnees)
 );
 
