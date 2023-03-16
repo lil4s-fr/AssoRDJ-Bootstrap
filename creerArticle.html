@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <title>Créer un article</title>
+</head>
+<body class="container-lg" data-bs-theme="dark">
+    <!-- corps de page-->
+    <main >
+        <section class="row gy-3 justify-content-between">
+            <h1 class="h3 text-center">Création d'un article</h1>
+            <p class="text-center ">Sur cette page, vous pouvez rédiger un nouvel article qui sera publié dans les actualités de l'asso RDJ.</p>
+            <!-- partie composition de l'article-->
+            <div class="col-12">
+                <!--zone de remplissage du titre-->
+                <div class="form-control text-white bg-dark mb-3">
+                    <label for="corps">Ajouter le titre de l'article</label>
+                    <input type="text" class="form-control is-valid" id="corps"></input>
+                </div>
+                <!--zone de remplissage du corps de texte-->              
+                <div class="form-control text-white bg-dark mb-3">
+                    <label for="corps">Ajouter le contenu de votre article</label>
+                    <textarea class="form-control" id="corps" rows="3"></textarea>
+                </div>                
+            </div>           
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <p class="text-center mb-3">Ajouter une image</p>
+                    <!-- insertion d'un bouton qui renvoie vers l'explorateur pour aller chercher l'image dans le disque dur-->
+                    <div class="form-group">
+                        <label for="fichier">Fichier</label>
+                        <input type="file" class="form-control-file" id="fichier">
+                    </div>
+                    <!-- placer l'image dans <figure class="figure"></figure>-->
+                    <!-- ajouter la class="img-fluid"pour que la largeur de l'image s'adapte à la largeur du conteneur dans lequel elle se situe-->
+                    <!-- ajouter également "rounded" pour arrondir les coins de l'image-->
+                    <!-- ajouter d-none d-md-block pour supprimer les images sur les petits écrans mais apparaissent sur les écrans plus grands-->
+                </div>
+                <article class="col-12  col-sm-6">
+                    <div class="form-control text-white bg-dark">
+                        <label for="corps">Ajouter la légende de l'image</label>
+                        <textarea class="form-control" id="corps" rows="1"></textarea>
+                    </div>
+                    <!-- ajouter <figcaption class="figure-caption text-end"></figcaption> pour la légende de l'image-->
+                </article>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-secondary active">
+                    Publier l'article
+                </button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
