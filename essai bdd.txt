@@ -1,0 +1,12 @@
+INSERT INTO utilisateurs (nom, prenom, numero_adherant, pseudo, mot_passe, mail, telephone)
+    VALUES ('Dias', 'Antoine', 0001, 'adias', 'root', 'antoine.dias.dunkerque@gamil.com', '0768885665');
+INSERT INTO commentaires (commentaire, like_dislike) VALUES ('test', 'L');
+INSERT INTO articles (titre, corps, date_ecriture) VALUES ('Super article', 'plein de données', 2023-03-16);
+INSERT INTO categories (nom, description) VALUES ('Jeu de fous', 'Un jeu pour les fous du roi !');
+INSERT INTO evenements (nom, date_creation, date_debut, date_fin, descritption) VALUES ('Tournoi des joueurs', 2023-03-16, 2023-04-1, 2023-04-2, 'Grande braderie des jeux'); 
+INSERT INTO coordonnees (numero_rue, rue, cp, ville) VALUES (72, Gambetta, 59240, Dunkerque);
+INSERT INTO reservations (demandeur, participant, validation, date_reservation, creneau, date_evenement, description) VALUES ('Antoine Dias', 'Jocker', true, 2023-03-25, '2023-03-31 12:59:00' '2023-03-31 13:00', 2023-03-31, 'Batman');
+INSERT INTO permissions (status) VALUES ('administrateur');
+INSERT INTO demande_contact (mail, message) VALUES ('nom.prenom@gmail.com', 'je veux jouer avec vous');
+INSERT INTO type_demande (nom) VALUES ('Création de membre');
+INSERT INTO salles (nom, capacite, lieu, acces_pmr) VALUES ('Les 3 balais', 100, 'Hogwards', true);
