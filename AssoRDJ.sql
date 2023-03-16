@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS public.demande_contact
     utilisateur integer NOT NULL,
     mail character varying(30) NOT NULL,
     message character varying(200),
-    type_demande character varying(50) NOT NULL,
+    type_demande integer NOT NULL,
     PRIMARY KEY (id_demandecontact)
 );
 
@@ -133,6 +133,13 @@ CREATE TABLE IF NOT EXISTS public.coordonnees
     PRIMARY KEY (id_coordonnees)
 );
 
+CREATE TABLE IF NOT EXISTS public.typdemande
+(
+    id_typedemande serial NOT NULL,
+    nom_type character varying NOT NULL,
+    PRIMARY KEY (id_typedemande)
+);
+
 ALTER TABLE IF EXISTS public.utilisateurs
     ADD CONSTRAINT fk_coordonnees FOREIGN KEY (coordonnees)
     REFERENCES public.coordonnees (id_coordonnees) MATCH SIMPLE
@@ -192,6 +199,14 @@ ALTER TABLE IF EXISTS public.categories
 ALTER TABLE IF EXISTS public.demande_contact
     ADD CONSTRAINT fk_utilisateur FOREIGN KEY (utilisateur)
     REFERENCES public.utilisateurs (id_utilisateur) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.demande_contact
+    ADD CONSTRAINT fk_typedemande FOREIGN KEY (type_demande)
+    REFERENCES public.typdemande (id_typedemande) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
