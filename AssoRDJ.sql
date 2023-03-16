@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS public.utilisateurs
     pseudo character varying(30) NOT NULL,
     mot_passe character varying(30) NOT NULL,
     coordonnees integer NOT NULL,
+    mail character varying(30) NOT NULL,
+    telephone character varying(15) NOT NULL,
     PRIMARY KEY (id_utilisateur)
 );
 
@@ -26,7 +28,6 @@ CREATE TABLE IF NOT EXISTS public.permissions
 CREATE TABLE IF NOT EXISTS public.articles
 (
     id_article serial NOT NULL,
-    categorie integer NOT NULL,
     utilisateur integer NOT NULL,
     titre character varying(30) NOT NULL,
     corps character varying(65535) NOT NULL,
@@ -49,7 +50,6 @@ CREATE TABLE IF NOT EXISTS public.commentaires
 CREATE TABLE IF NOT EXISTS public.categories
 (
     id_categorie serial NOT NULL,
-    reservation integer NOT NULL,
     nom character varying(30) NOT NULL,
     description character varying(300),
     PRIMARY KEY (id_categorie)
@@ -68,19 +68,18 @@ CREATE TABLE IF NOT EXISTS public.demande_contact
 CREATE TABLE IF NOT EXISTS public.evenements
 (
     id_evenement serial NOT NULL,
-    categorie integer NOT NULL,
     nom character varying(30) NOT NULL,
     date_creation date NOT NULL,
     "date_début" date NOT NULL,
     date_fin date NOT NULL,
     description character varying(200) NOT NULL,
+    organisateur integer NOT NULL,
     PRIMARY KEY (id_evenement)
 );
 
 CREATE TABLE IF NOT EXISTS public.reservations
 (
     id_reservation serial NOT NULL,
-    salle integer NOT NULL,
     demandeur character varying(30) NOT NULL,
     participant character varying(30) NOT NULL,
     validation boolean,
@@ -101,7 +100,7 @@ CREATE TABLE IF NOT EXISTS public.salles
     PRIMARY KEY (id_salle)
 );
 
-CREATE TABLE IF NOT EXISTS public.rdjsing
+CREATE TABLE IF NOT EXISTS public.rdjsign
 (
     id_rdjsign serial NOT NULL,
     reservation integer NOT NULL,
@@ -123,13 +122,11 @@ CREATE TABLE IF NOT EXISTS public.utilisateurs_reservations
 CREATE TABLE IF NOT EXISTS public.coordonnees
 (
     id_coordonnees serial NOT NULL,
-    mail character varying(30) NOT NULL,
     numero_rue character varying(10),
     rue character varying(30) NOT NULL,
     complement_adresse character varying(30),
     cp integer NOT NULL,
     ville character varying(30) NOT NULL,
-    telephone character varying(15) NOT NULL,
     PRIMARY KEY (id_coordonnees)
 );
 
@@ -138,6 +135,30 @@ CREATE TABLE IF NOT EXISTS public.typdemande
     id_typedemande serial NOT NULL,
     nom_type character varying NOT NULL,
     PRIMARY KEY (id_typedemande)
+);
+
+CREATE TABLE IF NOT EXISTS public.articles_categories
+(
+    articles_id_article serial NOT NULL,
+    categories_id_categorie serial NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.reservations_salles
+(
+    reservations_id_reservation serial NOT NULL,
+    salles_id_salle serial NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.reservations_categories
+(
+    reservations_id_reservation serial NOT NULL,
+    categories_id_categorie serial NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.categories_evenements
+(
+    categories_id_categorie serial NOT NULL,
+    evenements_id_evenement serial NOT NULL
 );
 
 ALTER TABLE IF EXISTS public.utilisateurs
@@ -151,14 +172,6 @@ ALTER TABLE IF EXISTS public.utilisateurs
 ALTER TABLE IF EXISTS public.permissions
     ADD CONSTRAINT fk_utilisateur FOREIGN KEY (utilisateur)
     REFERENCES public.utilisateurs (id_utilisateur) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public.articles
-    ADD CONSTRAINT fk_categorie FOREIGN KEY (categorie)
-    REFERENCES public.categories (id_categorie) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
@@ -188,14 +201,6 @@ ALTER TABLE IF EXISTS public.commentaires
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS public.categories
-    ADD CONSTRAINT fk_reservation FOREIGN KEY (reservation)
-    REFERENCES public.reservations (id_reservation) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
 ALTER TABLE IF EXISTS public.demande_contact
     ADD CONSTRAINT fk_utilisateur FOREIGN KEY (utilisateur)
     REFERENCES public.utilisateurs (id_utilisateur) MATCH SIMPLE
@@ -213,22 +218,14 @@ ALTER TABLE IF EXISTS public.demande_contact
 
 
 ALTER TABLE IF EXISTS public.evenements
-    ADD CONSTRAINT fk_categorie FOREIGN KEY (categorie)
-    REFERENCES public.categories (id_categorie) MATCH SIMPLE
+    ADD CONSTRAINT fk_organisateur FOREIGN KEY (organisateur)
+    REFERENCES public.utilisateurs (id_utilisateur) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS public.reservations
-    ADD CONSTRAINT fk_salle FOREIGN KEY (salle)
-    REFERENCES public.salles (id_salle) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public.rdjsing
+ALTER TABLE IF EXISTS public.rdjsign
     ADD CONSTRAINT fk_reservation FOREIGN KEY (reservation)
     REFERENCES public.reservations (id_reservation) MATCH SIMPLE
     ON UPDATE NO ACTION
@@ -263,6 +260,70 @@ ALTER TABLE IF EXISTS public.utilisateurs_reservations
 ALTER TABLE IF EXISTS public.utilisateurs_reservations
     ADD FOREIGN KEY (reservations_id_reservation)
     REFERENCES public.reservations (id_reservation) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.articles_categories
+    ADD FOREIGN KEY (articles_id_article)
+    REFERENCES public.articles (id_article) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.articles_categories
+    ADD FOREIGN KEY (categories_id_categorie)
+    REFERENCES public.categories (id_categorie) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.reservations_salles
+    ADD FOREIGN KEY (reservations_id_reservation)
+    REFERENCES public.reservations (id_reservation) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.reservations_salles
+    ADD FOREIGN KEY (salles_id_salle)
+    REFERENCES public.salles (id_salle) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.reservations_categories
+    ADD FOREIGN KEY (reservations_id_reservation)
+    REFERENCES public.reservations (id_reservation) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.reservations_categories
+    ADD FOREIGN KEY (categories_id_categorie)
+    REFERENCES public.categories (id_categorie) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.categories_evenements
+    ADD FOREIGN KEY (categories_id_categorie)
+    REFERENCES public.categories (id_categorie) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.categories_evenements
+    ADD FOREIGN KEY (evenements_id_evenement)
+    REFERENCES public.evenements (id_evenement) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
