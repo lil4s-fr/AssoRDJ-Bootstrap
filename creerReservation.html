@@ -1,89 +1,95 @@
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Association Roi des Jeux</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Faire une réservation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
 
-<body>
+  <body>
 
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="/index.html">
-                <img src="https://cdn.helloasso.com/img/logos/association%20roi%20des%20jeux-cd90bcde162e4b34961ce5f6c09603db.png"
-                alt="Association Roi Des Jeux" width="30" height="30" class="d-inline-block align-text-top me-2">
-                Association Roi Des Jeux
-              </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>  
-              <div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
-                <ul class="navbar-nav d-flex flex-lg-row justify-content-start align-items-lg-center">
-                  <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
-                    <a href="#" class="nav-link">réserver une salle</a>
-                  </li>
-                  <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
-                    <a href="#" class="nav-link">prochains évenements</a>
-                  </li>
-                  <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
-                    <a href="#" class="nav-link">nous contacter</a>
-                  </li>
-                  <li class="d-flex justify-content-end">
-                    <a class="btn btn-outline-primary">Nous rejoindre !</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+    <!-- NavBar -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/index.html">
+            <img src="https://cdn.helloasso.com/img/logos/association%20roi%20des%20jeux-cd90bcde162e4b34961ce5f6c09603db.png"
+              alt="Association Roi Des Jeux" width="30" height="30" class="d-inline-block align-text-top me-2">
+              Association Roi Des Jeux
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>  
+          <div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+            <ul class="navbar-nav d-flex flex-lg-row justify-content-start align-items-lg-center">
+              <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
+                <a href="#" class="nav-link">réserver une salle</a>
+              </li>
+              <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
+                <a href="#" class="nav-link">prochains évenements</a>
+              </li>
+              <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
+                <a href="#" class="nav-link">nous contacter</a>
+              </li>
+              <li class="d-flex justify-content-end">
+                <a class="btn btn-outline-primary">Nous rejoindre !</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <main>
+    <!-- Page créer Evènement -->
+      <section>
+        <div class="container">
+          <div class="row text-center my-4">
+            <h1>Réserver une salle</h1>
+          </div>
+          <div class="row text-center">
+            <p>Vous souhaitez organiser ou rejoindre une session de jeu au sein de l'association ?</p>
+            <p>Choisissez le créneau souhaité et sélectionnez une salle disponible.</p>
+          </div>
+        </div>
+      </section>
 
-        <section>
-            <div class="container">
-                <div class="row text-center my-4">
-                    <h1>Réserver une salle</h1>
-                </div>
-                <div class="row text-center">
-                    <p>Vous souhaitez organiser ou rejoindre une session de jeu au sein de l'association ?</p>
-                    <p>Choisissez le créneau souhaité et sélectionnez une salle disponible.</p>
-                </div>
-            </div>
-        </section>
+      <section>
+        <div class="container text-center p-5 mb-5 bg-body-tertiary">
+          <div class="row mb-3">
+            <h3>Date et heure de la réservation:</h3>
+          </div>
+          <div class="row mb-3">
+            <input type="datetime-local"  class="form-control">
+          </div>
+          <div class="row mb-3">
+            <h3>Salle souhaité</h3>
+          </div>
+          <div class="row mb-3">
+            <select class="form-select" aria-label="salle select">
+              <option selected>Choix de la salle</option>
+              <option value="1">Salle 1: "Salon"</option>
+              <option value="2">Salle 2: "Miroir"</option>
+              <option value="3">Salle 3: "Bibliothèque"</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-center p-2 flex-grow-1">
+            <button type="button" class="btn btn-primary btn-block btn-lg">Réserver</button>
+          </div>
+        </div>
+      </section>
 
-        <section>
-            <div class="container text-center my-4">
-                <div class="row my-2">
-                    <input type="datetime-local"  class="form-control">
-                </div>
-                <div class="row my-2">
-                    <select class="form-select" aria-label="salle select">
-                        <option selected>Choix de la salle</option>
-                        <option value="1">Salle 1: "Salon"</option>
-                        <option value="2">Salle 2: "Miroir"</option>
-                        <option value="3">Salle 3: "Bibliothèque"</option>
-                      </select>
-                </div>
-                <div class="col">
-                    <button>Réserver</button>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <button>Accéder à une feuille <br>
-                            de présence</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-         
+      <section>
+          <div class="container">
+              <div class="row">
+                  <div class="col">
+                    <button type="button" class="btn btn-primary btn-block btn-lg">Accèder à une feuille de présence</button>
+                  </div>
+              </div>
+          </div>
+      </section>
+        
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
@@ -98,8 +104,5 @@
         </div>
     </footer>
 
-</body>
-
-
-
+  </body>
 </html>
